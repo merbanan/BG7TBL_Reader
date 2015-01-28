@@ -6,16 +6,6 @@ from pylab import *
 
 hold(False)
 ser = serial.Serial('/dev/ttyUSB0',57600,timeout=1)
-#ser.write("\x8f\x72\x00\x8f\x72\x00\x8f\x72\x00")
-#s = ser.read(10)
-#ser.write("\x8f\x76\x8f\x66\x30\x30\x30\x30\x30\x30\x30\x30\x30")
-#s = ser.read(10)
-#ser.write("\x8f\x73\x8f\x66\x30\x30\x30\x30\x30\x30\x30\x30\x30")
-#s = ser.read(10)
-#ser.write("\x8f\x76\x8f\x66\x30\x30\x30\x30\x30\x30\x30\x30\x30")
-#s = ser.read(10)
-#ser.write("\x8f\x73\x8f\x66\x30\x30\x30\x30\x30\x30\x30\x30\x30")
-#s = ser.read(10)
 freq = "015000000" # 9
 stepsize = "00009000" # 8
 samples = "0250" # 4
@@ -58,13 +48,13 @@ for x in range(0, 1080):
 #im.save("/home/michael/specgram.jpeg") 
 
 
-sub_list2 = [75*(float(x) / 255) for x in sub_list]
+#sub_list2 = [75*(float(x) / 255) for x in sub_list]
 #print sub_list
 #print len(sub_list)
 #print sub_list2
-import matplotlib.pyplot as plt
-plt.plot(X,sub_list2)
-plt.show()
+#import matplotlib.pyplot as plt
+#plt.plot(X,sub_list2)
+#plt.show()
 
 
 
