@@ -37,7 +37,6 @@ for x in range(0, 1080):
 
 	ax1=subplot(212)
 	ax1.imshow(arr,cmap=plt.cm.spectral) #Needs to be in row,col order
-#	plt.plot(X,arr2)
         plt.savefig('./fig.jpg')
 
 
