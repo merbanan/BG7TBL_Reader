@@ -6,9 +6,9 @@ from pylab import *
 
 hold(False)
 ser = serial.Serial('/dev/ttyUSB0',57600,timeout=1)
-freq = "015000000" # 9
-stepsize = "00009000" # 8
-samples = "0250" # 4
+freq = "240000000" # 9
+stepsize = "00011000" # 8
+samples = "1000" # 4
 print stepsize
 arr = np.zeros( (1, int(samples)), np.uint8 )
 
