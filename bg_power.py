@@ -56,7 +56,7 @@ for x in range(0, 1080):
 		freq2 = ((int(freq)*10) + (i+1)*(stepsizeline*10) - (stepsizesingle*10))
 		string1 = date.strftime("%Y-%m-%d") + ", " + date.strftime('%H:%M:%S') + ", " + str(freq1) + ", " + str(freq2) + ", " + str(int(stepsize)*10) + ", " + str(int(samples)) + ", " + powerstring
 		print string1
-		f.write(string1)
+		file.write(string1)
   #      ax=subplot(211)
   #      arr2 = np.mean(arr,axis=0)
   #      ax.autoscale(True)
