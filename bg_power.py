@@ -21,9 +21,9 @@ arr = np.zeros( (1, int(samples)), np.uint8 )
 import matplotlib.pyplot as plt
 arr = []
 bw = int(stepsize)*int(samples)*10
-print "Bandwidth = " + str(bw) + " Hz"
-print "Min freq = " + str(int(freq)*10)
-print "Max freq = " + str(int(freq)*10 + int(bw))
+#print "Bandwidth = " + str(bw) + " Hz"
+#print "Min freq = " + str(int(freq)*10)
+#print "Max freq = " + str(int(freq)*10 + int(bw))
 X = np.linspace(int(freq)*10, int(freq)*10 + int(bw), int(samples))
 for x in range(0, 1080):
 	time.sleep(5)
