@@ -27,7 +27,6 @@ samples = "1000" # 4
 #print stepsize
 arr = np.zeros( (1, int(samples)), np.uint8 )
 
-import matplotlib.pyplot as plt
 arr = []
 bw = int(stepsize)*int(samples)*10
 #print "Bandwidth = " + str(bw) + " Hz"
