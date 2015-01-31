@@ -73,9 +73,9 @@ if (stepsize < 11000):
 	stepsize=11000
 	high_freq=int(low_freq)+stepsize*samples
 
-if (high_freq > 4.4e9):
+if (high_freq > maximum_frequency):
 	print "High frequency bound exceeded, changing high freq"
-	high_freq=4.4e9
+	high_freq=maximum_frequency
 	samples=((int(high_freq)-int(low_freq))/(stepsize*10))
 
 #print args.include_freq
