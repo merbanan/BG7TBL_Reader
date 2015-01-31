@@ -8,6 +8,9 @@ import argparse
 from pylab import *
 import time
 from datetime import date
+# Maximum and minimum device frequencies
+maximum_frequency=4400000000
+minimum_frequency=138000000
 
 parser = argparse.ArgumentParser(description='Output heatmap.py-compatible power files for BG7TBL Spec Analyzer')
 parser.add_argument('output_path', metavar='TITLE', type=str,
@@ -30,7 +33,7 @@ for i, arg in enumerate(sys.argv):
     if (arg[0] == '-') and arg[1].isdigit():
         sys.argv[i] = ' ' + arg
 args = parser.parse_args()
-print args.include_freq
+#print args.include_freq
 #From keenard's code
 
 def freq_parse(s):
@@ -75,25 +78,35 @@ if (high_freq > 4.4e9):
 	high_freq=4.4e9
 	samples=((int(high_freq)-int(low_freq))/(stepsize*10))
 
-print args.include_freq
+#print args.include_freq
 
 if args.include_freq is None:
 	print "No include freq specified. Continuing..."
 else:
-	gcd_12=gcd(int(low_freq),stepsize)
-	print str(gcd_12)
-	print str(float(freq_parse(args.include_freq))-(float(freq_parse(args.include_freq))/gcd_12))
+        stepsize = int((high_freq-low_freq)/(samples*10))
+        shift=((low_freq-(low_freq%stepsize)))
+        gcd_12=gcd(shift,stepsize)
+
+#	print str(gcd_12)
+#	print str(float(freq_parse(args.include_freq))-(float(freq_parse(args.include_freq))/gcd_12))
 	low_freq = float(freq_parse(args.include_freq))-(float(freq_parse(args.include_freq))/gcd_12)
+#	print shift
+	while ((low_freq - stepsize*10) > minimum_frequency):
+		low_freq = low_freq - (stepsize*10*1)
+
 	print "New low_freq: " + str(low_freq)
+	print "New high freq: " + str(low_freq+(samples*stepsize*10))
+	high_freq = low_freq+(samples*stepsize*10)
+	while (high_freq > maximum_frequency):
+		samples = (samples-1)
+		high_freq = low_freq+(samples*stepsize*10)
+
 
 freq_int = int(int(low_freq)/10)
 
 bw = stepsize*samples*10
 
-if (str(freq_int*10 + int(bw)) > 4.4e9):
-        print "High frequency bound exceeded, changing high freq"
-        high_freq=4.4e9
-        samples=(((freq_int*10 + int(bw))-int(low_freq))/(stepsize*10))
+	
 
 date = datetime.datetime.now()
 csvfile = date.strftime("%Y_%j__%H_%M_%S_%f")
