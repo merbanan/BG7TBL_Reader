@@ -10,8 +10,8 @@ import time
 from datetime import date
 
 parser = argparse.ArgumentParser(description='Output heatmap.py-compatible power files for BG7TBL Spec Analyzer')
-parser.add_argument('output_path', metavar='OUTPUT', type=str,
-    help='Output csv file prefix.')
+parser.add_argument('output_path', metavar='TITLE', type=str,
+    help='One-word-title of your job.')
 slicegroup = parser.add_argument_group('Slicing',
     'Efficiently render a portion of the data. (optional)  Frequencies can take G/M/k suffixes.  Timestamps look like "YYYY-MM-DD HH:MM:SS"  Durations take d/h/m/s suffixes.')
 slicegroup.add_argument('--low', dest='low_freq', default=None,
@@ -56,6 +56,10 @@ high_freq = freq_parse(args.high_freq)
 samples = 1000
 
 stepsize=int(((int(high_freq)-int(low_freq))/samples)/10)
+if (stepsize < 100):
+	print "Stepsize too small. Increasing frequency interval."
+	stepsize=100
+	high_freq=int(low_freq)+stepsize*samples
 date = datetime.datetime.now()
 csvfile = date.strftime("%Y_%j__%H_%M_%S_%f")
 
@@ -84,6 +88,8 @@ bw = stepsize*samples*10
 print "Bandwidth = " + str(bw) + " Hz"
 print "Min freq = " + str(freq_int*10)
 print "Max freq = " + str(freq_int*10 + int(bw))
+print "Samples = " + str(samples)
+print "Stepsize = " + str(stepsize)
 X = np.linspace(freq_int*10, freq_int*10 + int(bw), samples)
 print args.output_path + '--' + csvfile + '.csv'
 sys.stdout.flush()
