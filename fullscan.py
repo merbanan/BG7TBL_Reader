@@ -61,6 +61,11 @@ if (stepsize < 25000):
 	stepsize=25000
 	high_freq=int(low_freq)+stepsize*samples
 
+if (high_freq > 4.4e9):
+	print "High frequency bound exceeded, changing high freq"
+	high_freq=4.4e9
+	samples=((int(high_freq)-int(low_freq))/(stepsize*10))
+
 
 date = datetime.datetime.now()
 csvfile = date.strftime("%Y_%j__%H_%M_%S_%f")
@@ -124,7 +129,8 @@ for x in range(0, 1000000):
 		sample_max = int(samples)
 		sample_min = 1
 		freq1 = (freq_int*10 + i*(stepsizeline*10))
-		freq2 = ((freq_int*10) + (i+1)*(stepsizeline*10) - (stepsizesingle*10))
+#		freq2 = ((freq_int*10) + (i+1)*(stepsizeline*10) - (stepsizesingle*10))
+                freq2 = ((freq_int*10) + (i+1)*(stepsizeline*10) - 1)
 		string1 = date.strftime("%Y-%m-%d") + ", " + date.strftime('%H:%M:%S') + ", " + str(freq1) + ", " + str(freq2) + ", " + str(stepsize*10) + ", " + str(samples) + ", " + powerstring + "\n"
 		file.write(string1)
 		file.flush()
