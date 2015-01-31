@@ -56,9 +56,9 @@ high_freq = freq_parse(args.high_freq)
 samples = 1000
 
 stepsize=int(((int(high_freq)-int(low_freq))/samples))/10
-if (stepsize < 100):
+if (stepsize < 25000):
 	print "Stepsize too small. Increasing frequency interval."
-	stepsize=100
+	stepsize=25000
 	high_freq=int(low_freq)+stepsize*samples
 
 
