@@ -18,6 +18,9 @@ slicegroup.add_argument('--low', dest='low_freq', default=None,
     help='Minimum frequency for scanning.')
 slicegroup.add_argument('--high', dest='high_freq', default=None,
     help='Maximum frequency for scanning.')
+slicegroup.add_argument('--include', dest='include_freq', default=None,
+    help='Include frequency for scanning.')
+
 #slicegroup.add_argument('--res', dest='res_factor', default=None,
 #    help='Resolution factor. Greater than 1 results in n-range scan')
 #slicegroup.add_argument('--samples', dest='samples', default=None,
@@ -43,7 +46,14 @@ def freq_parse(s):
         s = s[:-1]
     return float(s) * suffix
 
+def gcd(a, b):
+    """Return greatest common divisor using Euclid's Algorithm."""
+    while b:      
+        a, b = b, a % b
+    return a
 
+def lcm(a, b):
+    return (a * b // gcd(a, b))
 
 
 
@@ -56,17 +66,23 @@ high_freq = freq_parse(args.high_freq)
 samples = 1000
 
 stepsize=int(((int(high_freq)-int(low_freq))/samples))/10
-if (stepsize < 25000):
+if (stepsize < 11000):
 	print "Stepsize too small. Increasing frequency interval."
-	stepsize=25000
+	stepsize=11000
 	high_freq=int(low_freq)+stepsize*samples
 
 if (high_freq > 4.4e9):
 	print "High frequency bound exceeded, changing high freq"
 	high_freq=4.4e9
 	samples=((int(high_freq)-int(low_freq))/(stepsize*10))
+if (args.include_freq != 'None'):
 
+	gcd_12=gcd(int(low_freq),stepsize)
 
+	print str(gcd_12)
+	print str(float(freq_parse(args.include_freq))-(float(freq_parse(args.include_freq))/gcd_12))
+	low_freq = float(freq_parse(args.include_freq))-(float(freq_parse(args.include_freq))/gcd_12)
+	print "New low_freq: " + str(low_freq)
 date = datetime.datetime.now()
 csvfile = date.strftime("%Y_%j__%H_%M_%S_%f")
 
