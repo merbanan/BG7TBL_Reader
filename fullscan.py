@@ -56,9 +56,9 @@ high_freq = freq_parse(args.high_freq)
 samples = 1000
 
 stepsize=int(((int(high_freq)-int(low_freq))/samples))
-if (stepsize < 1000):
+if (stepsize < 100):
 	print "Stepsize too small. Increasing frequency interval."
-	stepsize=1000
+	stepsize=100
 	high_freq=int(low_freq)+stepsize*samples
 
 
@@ -77,7 +77,7 @@ freq_str = "{0:0>9}".format(freq_int) # 9
 #freq2_str = "{0:0>9}".format(freq2) # 9
 #stepsize = "00011000" # 8
 #freq = "013800000" # 9
-stepsize_str = "{0:0>8}".format(stepsize/10) # 9
+stepsize_str = "{0:0>8}".format(stepsize) # 9
 
 #stepsize2 = "00100000" # 8
 samples_str = "{0:0>4}".format(samples) # 9
@@ -91,7 +91,7 @@ print "Bandwidth = " + str(bw) + " Hz"
 print "Min freq = " + str(freq_int*10)
 print "Max freq = " + str(freq_int*10 + int(bw))
 print "Samples = " + str(samples)
-print "Stepsize = " + str(stepsize)
+print "Stepsize = " + str(stepsize*10)
 X = np.linspace(freq_int*10, freq_int*10 + int(bw), samples)
 print args.output_path + '--' + csvfile + '.csv'
 sys.stdout.flush()
