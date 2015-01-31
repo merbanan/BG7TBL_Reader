@@ -19,7 +19,7 @@ slicegroup.add_argument('--low', dest='low_freq', default=None,
 slicegroup.add_argument('--high', dest='high_freq', default=None,
     help='Maximum frequency for scanning.')
 slicegroup.add_argument('--include', dest='include_freq', default=None,
-    help='Include frequency for scanning.')
+    help='Align to frequency for scanning.')
 #slicegroup.add_argument('--res', dest='res_factor', default=None,
 #    help='Resolution factor. Greater than 1 results in n-range scan')
 #slicegroup.add_argument('--samples', dest='samples', default=None,
@@ -74,7 +74,9 @@ if (high_freq > 4.4e9):
 	print "High frequency bound exceeded, changing high freq"
 	high_freq=4.4e9
 	samples=((int(high_freq)-int(low_freq))/(stepsize*10))
+
 print args.include_freq
+
 if args.include_freq is None:
 	print "No include freq specified. Continuing..."
 else:
@@ -91,7 +93,7 @@ bw = stepsize*samples*10
 if (str(freq_int*10 + int(bw)) > 4.4e9):
         print "High frequency bound exceeded, changing high freq"
         high_freq=4.4e9
-        samples=((int(high_freq)-int(low_freq))/(stepsize*10))
+        samples=(((freq_int*10 + int(bw))-int(low_freq))/(stepsize*10))
 
 date = datetime.datetime.now()
 csvfile = date.strftime("%Y_%j__%H_%M_%S_%f")
