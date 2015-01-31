@@ -55,7 +55,7 @@ low_freq = freq_parse(args.low_freq)
 high_freq = freq_parse(args.high_freq)
 samples = 1000
 
-stepsize=((int(high_freq)-int(low_freq))/samples)/10
+stepsize=int(((int(high_freq)-int(low_freq))/samples)/10)
 date = datetime.datetime.now()
 csvfile = date.strftime("%Y_%j__%H_%M_%S_%f")
 
@@ -106,8 +106,8 @@ for x in range(0, 1000000):
 	arr.append(sub_list)
 
 	date = datetime.datetime.now()
-	freq1 = freq*10
-	freq2 = freq*10
+	freq1 = freq_int*10
+	freq2 = freq_int*10
 	stepsizeline = stepsize*10
 	stepsizesingle = stepsize
         for i in range (0, len(chunks), 1):
