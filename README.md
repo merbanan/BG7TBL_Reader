@@ -14,3 +14,5 @@ I designed this based on the BG7TBL Simple spectrum analyzer with range 138MHz-4
 The step is configurable, and when finding the maximum frequency, the multiplication of the step by the number of samples is done. This must be multiplied by 10 (all frequencies are basically 10 times higher than what you input on the device), and added to the initial frequency int(freq) to get the maximum frequency.
 
 xvfb-run is needed if you don't have access to an x-server, since I presently using some pylab routines in the source code, which is part of matplotlib.
+
+--include doesn't work yet (panning feature)
