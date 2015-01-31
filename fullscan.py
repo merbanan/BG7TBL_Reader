@@ -129,8 +129,8 @@ for x in range(0, 1000000):
 		sample_max = int(samples)
 		sample_min = 1
 		freq1 = (freq_int*10 + i*(stepsizeline*10))
-#		freq2 = ((freq_int*10) + (i+1)*(stepsizeline*10) - (stepsizesingle*10))
-                freq2 = ((freq_int*10) + (i+1)*(stepsizeline*10) - 1)
+		freq2 = ((freq_int*10) + (i+1)*(stepsizeline*10) - (stepsizesingle*10))
+#                freq2 = ((freq_int*10) + (i+1)*(stepsizeline*10) - 1)
 		string1 = date.strftime("%Y-%m-%d") + ", " + date.strftime('%H:%M:%S') + ", " + str(freq1) + ", " + str(freq2) + ", " + str(stepsize*10) + ", " + str(samples) + ", " + powerstring + "\n"
 		file.write(string1)
 		file.flush()
